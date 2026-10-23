@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Day 1 — Next.js Project Setup & UI Foundation
 
-## Getting Started
+Completed Tasks
 
-First, run the development server:
+1. Project Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Set up the Next.js project and installed the required dependencies.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Installed and configured shadcn/ui.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Installed the required shadcn/ui components.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Created reusable UI components for the application.
 
-## Learn More
+2. App Shell & Layout
 
-To learn more about Next.js, take a look at the following resources:
+Built an AppShell component to manage the overall website layout.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Added consistent top spacing across pages to accommodate the fixed header.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Established the initial layout structure for the application.
 
-## Deploy on Vercel
+3. Website Header
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Created a fixed header positioned at the top of the page.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Added a blurred, semi-transparent background for a modern appearance.
+
+Integrated the website logo and navigation links:
+
+Products
+
+How It Works
+
+Pricing
+
+Added a Sign In button.
+
+4. Dynamic Header Preparation
+
+Prepared the header structure to support different user authentication states.
+
+Prepared layout variations based on the current page type, including landing and non-landing pages.
+
+Day 1 Outcome
+
+Established the initial Next.js project structure, configured shadcn/ui, created reusable UI components, and built the foundation for the application's shared layout and navigation.
