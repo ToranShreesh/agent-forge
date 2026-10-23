@@ -1,47 +1,11 @@
-Day 1 — Next.js Project Setup & UI Foundation
+# Day 1 — Project Setup & UI Foundation
 
-Completed Tasks
+## Completed Tasks
+- Set up the Next.js project and configured shadcn/ui with the required components.
+- Created reusable UI components for the application.
+- Built an `AppShell` component to manage the overall layout and maintain consistent spacing across pages.
+- Developed a fixed, semi-transparent header with a blur effect, website logo, navigation links (Products, How It Works, Pricing), and a Sign In button.
+- Prepared the header to support different authentication states and page layouts.
 
-1. Project Setup
-
-Set up the Next.js project and installed the required dependencies.
-
-Installed and configured shadcn/ui.
-
-Installed the required shadcn/ui components.
-
-Created reusable UI components for the application.
-
-2. App Shell & Layout
-
-Built an AppShell component to manage the overall website layout.
-
-Added consistent top spacing across pages to accommodate the fixed header.
-
-Established the initial layout structure for the application.
-
-3. Website Header
-
-Created a fixed header positioned at the top of the page.
-
-Added a blurred, semi-transparent background for a modern appearance.
-
-Integrated the website logo and navigation links:
-
-Products
-
-How It Works
-
-Pricing
-
-Added a Sign In button.
-
-4. Dynamic Header Preparation
-
-Prepared the header structure to support different user authentication states.
-
-Prepared layout variations based on the current page type, including landing and non-landing pages.
-
-Day 1 Outcome
-
-Established the initial Next.js project structure, configured shadcn/ui, created reusable UI components, and built the foundation for the application's shared layout and navigation.
+## Outcome
+Established the project's initial UI foundation, reusable component structure, and shared navigation layout, preparing the application for further feature development.
