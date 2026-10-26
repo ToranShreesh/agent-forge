@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../lib/generated/prisma"
@@ -10,4 +5,101 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+model User {
+  id             String        @id @default(cuid())
+  clerkId        String        @unique
+  email          String        @unique
+  name           String?
+  imageUrl       String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  // Workspaces this user created — membership/roles for all workspaces live in Clerk
+  // Organizations,
+  
+  createdWorkspaces Workspace[]
+  agentPrompts      AgentPrompt[]
+}
+
+enum WorkspaceStatus {
+  PLANNING
+  IN_PROGRESS
+  IN_REVIEW
+  DONE
+}
+
+model Workspace {
+  id             String        @id @default(cuid())
+  name           String        
+  description    String?        
+  creatorId      String
+  creator        User           @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  // Clerk Organization id - the membership/role source of truth (org:admin,org:member, org:viewer).
+  // One org can own many workspaces (not unique); nullable because a solo user's
+  // personal workspace has no org behind it under Membership-optional mode.
+  clerkOrgId String?
+
+  // Dashboard kanban column + order within it. position is a float so a dropped card can
+  // take the midpoint between its neighbors - only the moved card ever gets written.
+  status        WorkspaceStatus @default(PLANNING)
+  position      Float           @default(0)
+  //Public read-only link token; null means sharing is off. Resetting it kills old links.
+  shareToken    String?        @unique
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  //Every workspace is always exactly one doc + one canvas, paired - not a generic list of
+  // surfaces. Both are created alongsiide the workspace itself.
+  doc           Doc?
+  canvas        Canvas?
+  agentPrompts  AgentPrompt[]
+
+@@index([creatorId])
+@@index([clerkOrgId])
+
+}
+
+model Doc {
+  id            String   @id @default(cuid())
+  workspaceId   String   @unique
+  // BlockNote block JSON - a readable copy for server-side features (agent, shareview).
+  content       Json?
+  //Yjs document state - the real-time collaboration source of truth.
+  yjsState      Bytes?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete:Cascade)
+
+}
+
+model Canvas {
+  id          String   @id @default(cuid())
+  workspaceId String   @unique
+  // tldraw shape/store snapshot.
+  content     Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete:Cascade)
+
+
+}
+
+model AgentPrompt {
+  id          String   @id @default(cuid())
+  // Who the prompt counts against: the workspace's Clerk org id, or the Clerk user
+  // id for a
+  // personal workspace. Clerk prefixes ids ("org_", "user_"), so the two never
+  // collide.
+  ownerId     String
+  userId      String
+  workspaceId String?
+  createdAt   DateTime @default(now())
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
+
+  @@index([ownerId, createdAt])
 }

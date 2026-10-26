@@ -16,3 +16,13 @@ Established the project's initial UI foundation, reusable component structure, a
 - Completed the initial database schema design using draw.io.
 ## Outcome
 Established the authentication system, database connectivity, and database architecture, creating a solid foundation for implementing core application features.
+
+# Day 3 — Database Schema & Prisma Model Implementation
+## Completed Tasks
+- Designed and finalized the core data models (User, Workspace, Doc, Canvas, and AgentPrompt) in schema.prisma.
+- Configured PostgreSQL datasource provider and Prisma Client output paths.
+- Established robust relational mappings with proper cascade rules and unique constraints for 1-to-1 workspace-to-doc and workspace-to-canvas architecture.
+- Defined custom enums (WorkspaceStatus) to support Kanban-style workspace tracking (PLANNING, IN_PROGRESS, IN_REVIEW, DONE).
+
+## Outcome
+Successfully implemented and structured the complete database schema in Prisma, establishing the data foundation for user management, real-income collaboration state, and workspace features.
